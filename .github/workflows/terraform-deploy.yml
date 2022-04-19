@@ -2,13 +2,11 @@ name: Terraform Deploy
 
 on:
   workflow_call:
-    inputs:
+    secrets:
       aws-access-key-id:
         required: true
-        type: string
       aws-secret-access-key:
         required: true
-        type: string
 
 jobs:
   terraform:
@@ -38,8 +36,8 @@ jobs:
       - name: Terraform Plan
         working-directory: ./terraform
         env:
-          AWS_ACCESS_KEY_ID: ${{ inputs.aws-access-key-id }}
-          AWS_SECRET_ACCESS_KEY: ${{ inputs.aws-secret-access-key }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.aws-access-key-id }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.aws-secret-access-key }}
         run: terraform plan
 
         # On push to main, build or change infrastructure according to Terraform configuration files
