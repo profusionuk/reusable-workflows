@@ -3,18 +3,17 @@ name: Docker deploy to ECR
 on:
   workflow_call:
     inputs:
-      aws-access-key-id:
-        required: true
-        type: string
-      aws-secret-access-key:
-        required: true
-        type: string
       aws-region:
         required: true
         type: string
       repo-name:
         required: true
         type: string
+    secrets:
+      aws-access-key-id:
+        required: true
+      aws-secret-access-key:
+        required: true
 
 jobs:
   Build and deploy:
@@ -25,8 +24,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ inputs.aws-access-key-id }}
-          aws-secret-access-key: ${{ inputs.aws-secret-access-key }}
+          aws-access-key-id: ${{ secrets.aws-access-key-id }}
+          aws-secret-access-key: ${{ secrets.aws-secret-access-key }}
           aws-region: ${{inputs.aws-region}}
 
       - name: Login to Amazon ECR
