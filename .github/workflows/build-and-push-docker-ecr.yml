@@ -9,6 +9,9 @@ on:
       repo-name:
         required: true
         type: string
+      role-to-assume:
+        required: true
+        type: string
     secrets:
       aws-access-key-id:
         required: true
@@ -27,6 +30,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.aws-access-key-id }}
           aws-secret-access-key: ${{ secrets.aws-secret-access-key }}
+          role-to-assume: ${{ inputs.role-to-assume }}
           aws-region: ${{inputs.aws-region}}
 
       - name: Login to Amazon ECR
