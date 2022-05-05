@@ -139,9 +139,3 @@ jobs:
 <div align="right">
 <a href="#table-of-contents">Back to TOC</a>
 </div>
-
-
-
-<div align="right">
-<a href="#table-of-contents">Back to TOC</a>
-</div>
