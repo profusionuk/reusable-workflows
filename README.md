@@ -25,6 +25,7 @@ So, you can start to deploy immediately without any configuration.
   - [⭐️ Python Pytest](#️-python-pytest)
   - [⭐️ Terraform AWS apply](#️-terraform-aws-apply)
   - [⭐️ Deploy Docker image to AWS ECR](#️-deploy-docker-image-to-aws-ecr)
+  - [⭐️ Run Serverless Deploy with assume-roles](#️-run-serverless-deploy-with-assume-roles)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -133,6 +134,37 @@ jobs:
     secrets:
       aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
       aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+
+```
+
+### ⭐️ Run Serverless Deploy with assume-roles
+
+This is an example workflow for running serverless deploy assuming into another account.
+This workflow will take an AWS access key, secret key, region, role-arn.
+
+```yaml
+# The name of the action
+name: 'Serverless Deploy'
+
+# Paths: will run tests only if code in the given directory changes
+on:
+  push:
+    branches:
+      - main
+
+
+# What to do when the action is triggered
+jobs:
+  # Execure the serverless deploy job
+  deploy:
+    name: Deploy
+    # Create deployment job
+    uses: "YOUR-USER/YOUR-REPOSITORY-NAME/.github/workflows/serverless-deploy.yml@main"
+    secrets:
+      AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+      AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+      REGION: ${{secrets.AWS_REGION}}
+      ROLE_ARN: ${{secrets.ROLE_ARN}}
 
 ```
 
