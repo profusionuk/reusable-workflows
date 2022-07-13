@@ -23,6 +23,7 @@ So, you can start to deploy immediately without any configuration.
 - [Getting started](#getting-started)
 - [Examples](#examples)
   - [⭐️ Python Pytest](#️-python-pytest)
+  - [⭐️ Python Pytest with Coverage](#️-python-pytest-with-coverage)
   - [⭐️ Terraform AWS apply](#️-terraform-aws-apply)
   - [⭐️ Deploy Docker image to AWS ECR](#️-deploy-docker-image-to-aws-ecr)
   - [⭐️ Run Serverless Deploy with assume-roles](#️-run-serverless-deploy-with-assume-roles)
