@@ -71,6 +71,40 @@ jobs:
 </div>
 
 
+### ⭐️ Python Pytest with Coverage
+
+This is an example workflow for Python Pytest and a coverage report posted on PR.
+This workflow will take a Python version as an input, pip install your requirements.txt file, run your tests and export a code coverage report to a PR comment.
+
+```yaml
+# The name of the action
+name: 'Python Tests with Coverage'
+
+# Paths: will run tests only if code in the given directory changes
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "*/*.py"
+      - "*.py"
+
+
+# What to do when the action is triggered
+jobs:
+  pytest:
+    name: "Python tests"
+    uses: "YOUR-USER/YOUR-REPOSITORY-NAME/.github/workflows/python-pytest-with-coverage.yml@main"
+    with:
+    # The Python version your code is written in
+      python-version: "3.9.1"
+```
+
+<div align="right">
+<a href="#table-of-contents">Back to TOC</a>
+</div>
+
+
 ### ⭐️ Terraform AWS apply
 
 This is an example workflow for Terraform deployments.
