@@ -8,7 +8,6 @@ Reusable GitHub actions
 
 This is a collection of **GitHub Actions** to deploy your commonly reusable workflows in a version controlled state.
 
-
 For new users of GitHub Actions:
 Note that the `GITHUB_TOKEN` is **NOT** a personal access token.
 A GitHub Actions runner automatically creates a `GITHUB_TOKEN` secret to authenticate in your workflow.
@@ -22,14 +21,13 @@ So, you can start to deploy immediately without any configuration.
 - [Table of Contents](#table-of-contents)
 - [Getting started](#getting-started)
 - [Examples](#examples)
-  - [⭐️ Python Pytest](#️-python-pytest)
-  - [⭐️ Terraform AWS apply](#️-terraform-aws-apply)
-  - [⭐️ Deploy Docker image to AWS ECR](#️-deploy-docker-image-to-aws-ecr)
-  - [⭐️ Run Serverless Deploy with assume-roles](#️-run-serverless-deploy-with-assume-roles)
+    - [⭐️ Python Pytest](#️-python-pytest)
+    - [⭐️ Python Pytest with Coverage](#️-python-pytest-with-coverage)
+    - [⭐️ Terraform AWS apply](#️-terraform-aws-apply)
+    - [⭐️ Deploy Docker image to AWS ECR](#️-deploy-docker-image-to-aws-ecr)
+    - [⭐️ Run Serverless Deploy with assume-roles](#️-run-serverless-deploy-with-assume-roles)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-
 
 ## Getting started
 
@@ -62,7 +60,7 @@ jobs:
     name: "Python tests"
     uses: "YOUR-USER/YOUR-REPOSITORY-NAME/.github/workflows/python-pytest.yml@main"
     with:
-    # The Python version your code is written in
+      # The Python version your code is written in
       python-version: "3.9.1"
 ```
 
@@ -70,6 +68,39 @@ jobs:
 <a href="#table-of-contents">Back to TOC</a>
 </div>
 
+### ⭐️ Python Pytest with Coverage
+
+This is an example workflow for Python Pytest and a coverage report posted on PR.
+This workflow will take a Python version as an input, pip install your requirements.txt file, run your tests and export
+a code coverage report to a PR comment.
+
+```yaml
+# The name of the action
+name: 'Python Tests with Coverage'
+
+# Paths: will run tests only if code in the given directory changes
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "*/*.py"
+      - "*.py"
+
+
+# What to do when the action is triggered
+jobs:
+  pytest:
+    name: "Python tests"
+    uses: "YOUR-USER/YOUR-REPOSITORY-NAME/.github/workflows/python-pytest-with-coverage.yml@main"
+    with:
+      # The Python version your code is written in
+      python-version: "3.9.1"
+```
+
+<div align="right">
+<a href="#table-of-contents">Back to TOC</a>
+</div>
 
 ### ⭐️ Terraform AWS apply
 
@@ -102,7 +133,6 @@ jobs:
 <div align="right">
 <a href="#table-of-contents">Back to TOC</a>
 </div>
-
 
 ### ⭐️ Deploy Docker image to AWS ECR
 

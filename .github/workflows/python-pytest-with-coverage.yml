@@ -1,0 +1,38 @@
+name: Python Pytest With Coverage
+
+on:
+  workflow_call:
+    inputs:
+      python-version:
+        required: true
+        type: string
+
+jobs:
+  code-cov:
+    # Run on a Ubuntu VM
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the GitHub repo
+      - uses: actions/checkout@v2
+
+      # Install Python
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ inputs.python-version }}
+
+      # Pip install project dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest pytest-cov
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      # Run pytest with coverage
+      - name: Build coverage file
+        run: |
+          pytest --cache-clear --cov=. . > pytest-coverage.txt
+
+      # Comment coverage
+      - name: Comment coverage
+        uses: coroo/pytest-coverage-commentator@v1.0.2
