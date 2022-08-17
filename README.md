@@ -21,11 +21,12 @@ So, you can start to deploy immediately without any configuration.
 - [Table of Contents](#table-of-contents)
 - [Getting started](#getting-started)
 - [Examples](#examples)
-    - [⭐️ Python Pytest](#️-python-pytest)
-    - [⭐️ Python Pytest with Coverage](#️-python-pytest-with-coverage)
-    - [⭐️ Terraform AWS apply](#️-terraform-aws-apply)
-    - [⭐️ Deploy Docker image to AWS ECR](#️-deploy-docker-image-to-aws-ecr)
-    - [⭐️ Run Serverless Deploy with assume-roles](#️-run-serverless-deploy-with-assume-roles)
+  - [⭐️ Python Pytest](#️-python-pytest)
+  - [⭐️ Python Pytest with Coverage](#️-python-pytest-with-coverage)
+  - [⭐️ Terraform AWS apply](#️-terraform-aws-apply)
+  - [⭐️ Deploy Docker image to AWS ECR](#️-deploy-docker-image-to-aws-ecr)
+  - [⭐️ Run Serverless Deploy with assume-roles](#️-run-serverless-deploy-with-assume-roles)
+  - [⭐️ Authenticate with GitHub for private repository access](#️-authenticate-with-github-for-private-repository-access)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -164,7 +165,6 @@ jobs:
     secrets:
       aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
       aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-
 ```
 
 ### ⭐️ Run Serverless Deploy with assume-roles
@@ -195,7 +195,28 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       REGION: ${{secrets.AWS_REGION}}
       ROLE_ARN: ${{secrets.ROLE_ARN}}
+```
+### ⭐️ Authenticate with GitHub for private repository access
 
+This is an example workflow for authenticating with GitHub to access private repositories in other actons.
+This workflow will take an organisation and access key.
+
+```yaml
+jobs:
+  terraform:
+    name: Terraform
+    container: hashicorp/terraform
+    steps:
+      - uses: actions/checkout@v1
+
+      - id: private-modules
+        uses: YOUR-USER/YOUR-REPOSITORY-NAME/.github/workflows/github-private-authentication.yml@main
+        with:
+          org: YOUR-GITHUB-ORGANISATION-NAME
+          token: ${{ secrets.MY_TOKEN }}
+
+      - id: init
+        run: terraform init
 ```
 
 <div align="right">
